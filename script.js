@@ -17,13 +17,28 @@ const btnHold = document.querySelector('.btn--hold');
 score0El.textContent = 0; 
 score1El.textContent = 0;
 
-const score =[0,0];
-let currentScore = 0;
-let activePlayer = 0;
-let playing = true;
+let score,currentScore,activePlayer,playing;
 
-dice.classList.add('hidden');
 
+const reset = function(){
+    score =[0,0];
+    currentScore = 0;
+    activePlayer = 0;
+    playing = true;
+    score0El.textContent = 0; 
+    score1El.textContent = 0;
+    currentScore0El.textContent = 0; 
+    currentScore1El.textContent = 0;
+
+
+    player0.classList.add('player--active');
+    player1.classList.remove('player--active');
+    player0.classList.remove('player--winner');
+    player1.classList.remove('player--winner');
+    dice.classList.add('hidden');
+
+}
+reset()
 const switchSide = function(){
     document.getElementById(`current--${activePlayer}`).textContent = 0;
     currentScore = 0;
@@ -40,6 +55,7 @@ const winner = function(){
 
 }
 
+
 // add dice roll functionality
 
 btnRoll.addEventListener('click', function(){
@@ -50,7 +66,7 @@ const diceNumber = Math.trunc(Math.random()*6)+1;
 
 // display match number dice
 dice.classList.remove('hidden');
-dice.src = `dice-${diceNumber}.png`;
+dice.src = `images/dice-${diceNumber}.png`;
 
 // check for number 1, if 1,switch to another player
 
@@ -86,3 +102,7 @@ btnHold.addEventListener('click', function()
   }
   
 })
+
+//reset button functionality
+
+btnNew.addEventListener('click',reset)
